@@ -1,0 +1,13 @@
+class WinHeader:
+    def __init__(self):
+        ...
+
+class WinBody:
+    def __init__(self):
+        ...
+
+    def get_color_deph(self) -> int:
+        ...
+
+    def get_size(self) -> int:
+        ...
