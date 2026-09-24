@@ -35,5 +35,7 @@ class WinCreator:
     @staticmethod
     def write_file(header: list[int], body: list[int]):
         with open('file.bmp', 'wb') as f:
+            l1 = len(header)
+            l2 = len(body)
             f.write(bytes(header))
             f.write(bytes(body))

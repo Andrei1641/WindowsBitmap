@@ -5,10 +5,13 @@ class Translator:
     def from_int_to_bytes(number: int) -> list[int]:
         number_of_bits: int = Translator.__get_number_of_bits_in_int(number)
         number_of_bytes: int = math.ceil(number_of_bits / 8)
+        if not number_of_bytes: return [0]
         return list(number.to_bytes(number_of_bytes))
 
     @staticmethod
     def __get_number_of_bits_in_int(number: int) -> int:
+        if not number: return 0
+        if number == 1: return 1
         return math.ceil(math.log(number, 2))
 
     @staticmethod
@@ -18,7 +21,7 @@ class Translator:
     @staticmethod
     def fill_bytes_border(attr_bytes: list[int], bytes_border: int):
         if len(attr_bytes) < bytes_border:
-            attr_bytes = [0] * (4 - len(attr_bytes)) + attr_bytes
+            attr_bytes = [0] * (bytes_border - len(attr_bytes)) + attr_bytes
         return attr_bytes
 
 

@@ -16,6 +16,7 @@ class Pixel24Bit(Pixel):
         self.__red = red
         self.__green = green
         self.__blue = blue
+        self.__padding = 0
 
     def get_color_depth(self) -> int:
         return 24
@@ -25,4 +26,5 @@ class Pixel24Bit(Pixel):
         pixel_in_bin += Translator.from_int_to_bytes(self.__blue)
         pixel_in_bin += Translator.from_int_to_bytes(self.__green)
         pixel_in_bin += Translator.from_int_to_bytes(self.__red)
+        pixel_in_bin += Translator.from_int_to_bytes(self.__padding)
         return pixel_in_bin
