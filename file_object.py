@@ -1,5 +1,6 @@
 from pixel import Pixel
-from tools import CreationProver
+from tools import CreationProver, Translator
+
 
 class WinHeader:
     def __init__(self, bfSize: int, bfReserved: int, bfOffbits: int, biSize: int, biWith: int, biHight: int,
@@ -22,12 +23,18 @@ class WinHeader:
         self.set_biClrUsed(biClrUsed)
         self.set_biClrImportant(biClrImportant)
 
+    @staticmethod
+    def translate_attr_in_byte_getter(attr: int, bytes_border: int) -> list[int]:
+        attr_bytes: list[int] = Translator.from_int_to_bytes(attr)
+        attr_bytes_filled: list[int] = Translator.fill_bytes_border(attr_bytes, bytes_border)
+        return Translator.translate_endian(attr_bytes_filled)
 
-    def get_bfType(self) -> int:
-        return self.__bfType
+    def get_bfType(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__bfType, 2)
 
-    def get_bfSize(self) -> int:
-        return self.__bfSize
+    def get_bfSize(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__bfSize, 4)
+
 
     def set_bfSize(self, bfSize: int):
         if CreationProver.is_out_of_border(4, bfSize):
@@ -36,8 +43,8 @@ class WinHeader:
             raise ValueError('too much bytes are used')
 
 
-    def get_bfReserved(self) -> int:
-        return self.__bfReserved
+    def get_bfReserved(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__bfReserved, 4)
 
     def set_bfReserved(self, bfReserved: int):
         if CreationProver.is_out_of_border(4, bfReserved):
@@ -46,8 +53,8 @@ class WinHeader:
             raise ValueError('too much bytes are used')
 
 
-    def get_bfOffBits(self) -> int:
-        return self.__bfOffBits
+    def get_bfOffBits(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__bfOffBits, 4)
 
     def set_bfOffBits(self, bfOffBits: int):
         if CreationProver.is_out_of_border(4, bfOffBits):
@@ -56,8 +63,8 @@ class WinHeader:
             raise ValueError('too much bytes are used')
 
 
-    def get_biSize(self) -> int:
-        return self.__biSize
+    def get_biSize(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biSize, 4)
 
     def set_biSize(self, biSize: int):
         if CreationProver.is_out_of_border(4, biSize):
@@ -66,8 +73,8 @@ class WinHeader:
             raise ValueError('too much bytes are used')
 
 
-    def get_biWidth(self) -> int:
-        return self.__biWidth
+    def get_biWidth(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biWidth, 4)
 
     def set_biWidth(self, biWidth: int):
         if CreationProver.is_out_of_border(4, biWidth):
@@ -76,8 +83,8 @@ class WinHeader:
             raise ValueError('too much bytes are used')
 
 
-    def get_biHeight(self) -> int:
-        return self.__biHeight
+    def get_biHeight(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biHeight, 4)
 
     def set_biHeight(self, biHeight: int):
         if CreationProver.is_out_of_border(4, biHeight):
@@ -86,8 +93,8 @@ class WinHeader:
             raise ValueError('too much bytes are used')
 
 
-    def get_biPlanes(self) -> int:
-        return self.__biPlanes
+    def get_biPlanes(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biPlanes, 2)
 
     def set_biPlanes(self, biPlanes: int):
         if CreationProver.is_out_of_border(2, biPlanes):
@@ -96,8 +103,8 @@ class WinHeader:
             raise ValueError('too much bytes are used')
 
 
-    def get_biBitCount(self) -> int:
-        return self.__biBitCount
+    def get_biBitCount(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biBitCount, 2)
 
     def set_biBitCount(self, biBitCoutn: int):
         if CreationProver.is_out_of_border(2, biBitCoutn):
@@ -105,8 +112,8 @@ class WinHeader:
         else:
             raise ValueError('too much bytes are used')
 
-    def get_biCompression(self) -> int:
-        return self.__biCompression
+    def get_biCompression(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biCompression, 4)
 
     def set_biCompression(self, biCompression: int):
         if CreationProver.is_out_of_border(4, biCompression):
@@ -114,8 +121,8 @@ class WinHeader:
         else:
             raise ValueError('too much bytes are used')
 
-    def get_biSizeImage(self) -> int:
-        return self.__biSizeImage
+    def get_biSizeImage(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biSizeImage, 4)
 
     def set_biSizeImage(self, biSizeImage: int):
         if CreationProver.is_out_of_border(4, biSizeImage):
@@ -123,8 +130,8 @@ class WinHeader:
         else:
             raise ValueError('too much bytes are used')
 
-    def get_biXPelsPerMeter(self) -> int:
-        return self.__biXPelsPerMeter
+    def get_biXPelsPerMeter(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biXPelsPerMeter, 4)
 
     def set_biXPelsPerMeter(self, biXPelsPerMeter: int):
         if CreationProver.is_out_of_border(4, biXPelsPerMeter):
@@ -132,8 +139,8 @@ class WinHeader:
         else:
             raise ValueError('too much bytes are used')
 
-    def get_biYPelsPerMeter(self) -> int:
-        return self.__biYPelsPerMeter
+    def get_biYPelsPerMeter(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biYPelsPerMeter, 4)
 
     def set_biYPelsPerMeter(self, biYPelsPerMeter: int):
         if CreationProver.is_out_of_border(4, biYPelsPerMeter):
@@ -141,8 +148,8 @@ class WinHeader:
         else:
             raise ValueError('too much bytes are used')
 
-    def get_biClrUsed(self) -> int:
-        return self.__biClrUsed
+    def get_biClrUsed(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biClrUsed, 4)
 
     def set_biClrUsed(self, biClrUsed: int):
         if CreationProver.is_out_of_border(4, biClrUsed):
@@ -150,8 +157,8 @@ class WinHeader:
         else:
             raise ValueError('too much bytes are used')
 
-    def get_biClrImportant(self) -> int:
-        return self.__biClrImportant
+    def get_biClrImportant(self) -> list[int]:
+        return WinHeader.translate_attr_in_byte_getter(self.__biClrImportant, 4)
 
     def set_biClrImportant(self, biClrImportant: int):
         if CreationProver.is_out_of_border(4, biClrImportant):

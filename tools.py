@@ -15,6 +15,12 @@ class Translator:
     def translate_endian(b: list[int]) -> list[int]:
         return b[::-1]
 
+    @staticmethod
+    def fill_bytes_border(attr_bytes: list[int], bytes_border: int):
+        if len(attr_bytes) < bytes_border:
+            attr_bytes = [0] * (4 - len(attr_bytes)) + attr_bytes
+        return attr_bytes
+
 
 class CreationProver:
     @staticmethod
