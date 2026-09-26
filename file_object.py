@@ -168,12 +168,25 @@ class WinHeader:
 
 
 class WinBody:
-    def __init__(self, pixels: list[Pixel]):
+    def __init__(self, pixels: list[Pixel], width: int, height: int):
         self.__pixels = pixels
+        self.__width = width
+        self.__height = height
+
+    @property
+    def height(self) -> int:
+        return self.__height
+
+    @property
+    def width(self) -> int:
+        return self.__width
 
     @property
     def pixels(self) -> list[Pixel]:
         return self.__pixels
+
+    def get_padding(self):
+        return self.__pixels[0].get_padding()
 
     def get_color_deph(self) -> int:
         return self.__pixels[0].get_color_depth()

@@ -10,13 +10,21 @@ class Pixel(ABC):
     @abstractmethod
     def to_bytes(self) -> list[int]:
         ...
+    @abstractmethod
+    def get_padding(self) -> int:
+        ...
 
 class Pixel24Bit(Pixel):
+    __padding: int = 0
+
     def __init__(self, red: int, green: int, blue: int):
         self.__red = red
         self.__green = green
         self.__blue = blue
-        self.__padding = 0
+        Pixel24Bit.__padding += 1
+
+    def get_padding(self) -> int:
+        return Pixel24Bit.__padding
 
     def get_color_depth(self) -> int:
         return 24
@@ -26,5 +34,4 @@ class Pixel24Bit(Pixel):
         pixel_in_bin += Translator.from_int_to_bytes(self.__blue)
         pixel_in_bin += Translator.from_int_to_bytes(self.__green)
         pixel_in_bin += Translator.from_int_to_bytes(self.__red)
-        pixel_in_bin += Translator.from_int_to_bytes(self.__padding)
         return pixel_in_bin
