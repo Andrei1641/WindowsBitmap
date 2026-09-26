@@ -1,18 +1,5 @@
-from abc import ABC, abstractmethod
-
-from tools import Translator
-
-
-class Pixel(ABC):
-    @abstractmethod
-    def get_color_depth(self) -> int:
-        ...
-    @abstractmethod
-    def to_bytes(self) -> list[int]:
-        ...
-    @abstractmethod
-    def get_padding(self) -> int:
-        ...
+from interface.pixel import Pixel
+from tools.tools import Translator
 
 class Pixel24Bit(Pixel):
     __padding: int = 0
