@@ -153,12 +153,12 @@ class WinBody(Body):
         self.__width = width
         self.__height = height
 
-    @property
-    def height(self) -> int:
+
+    def get_height(self) -> int:
         return self.__height
 
-    @property
-    def width(self) -> int:
+
+    def get_width(self) -> int:
         return self.__width
 
     @property
@@ -166,7 +166,7 @@ class WinBody(Body):
         return self.__pixels
 
     def get_body(self) -> list[int]:
-        padding_per_row = self.get_padding() // self.height
+        padding_per_row = self.get_padding() // self.get_height()
         padding_per_row_in_byte = [0] * padding_per_row
         pixels: list[Pixel] = self.pixels
         pixels_in_bytes: list[int] = []
@@ -174,7 +174,7 @@ class WinBody(Body):
         for pixel in pixels:
             pixels_in_bytes += pixel.to_bytes()
             row_pixel_counter += 1
-            if row_pixel_counter == self.width:
+            if row_pixel_counter == self.get_width():
                 pixels_in_bytes += padding_per_row_in_byte
                 row_pixel_counter = 0
 

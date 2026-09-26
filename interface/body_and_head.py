@@ -14,6 +14,14 @@ class Body(ABC):
     def get_color_deph(self) -> int:
         ...
 
+    @abstractmethod
+    def get_width(self) -> int:
+        ...
+
+    @abstractmethod
+    def get_height(self) -> int:
+        ...
+
 class Header(ABC):
     @abstractmethod
     def get_header(self) -> list[int]:
