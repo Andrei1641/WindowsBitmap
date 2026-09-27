@@ -177,9 +177,6 @@ class WinBody(Body):
             if row_pixel_counter == self.get_width():
                 pixels_in_bytes += padding_per_row_in_byte
                 row_pixel_counter = 0
-
-        for pixel in pixels:
-            pixels_in_bytes += pixel.to_bytes()
         return pixels_in_bytes
 
     def get_padding(self):
