@@ -166,7 +166,9 @@ class WinBody(Body):
         return self.__pixels
 
     def get_body(self) -> list[int]:
-        padding_per_row = self.get_padding() // self.get_height()
+        bytes_per_pixel = 24 // 8
+        row_bytes = self.get_width() * bytes_per_pixel
+        padding_per_row = (4 - (row_bytes % 4)) % 4
         padding_per_row_in_byte = [0] * padding_per_row
         pixels: list[Pixel] = self.pixels
         pixels_in_bytes: list[int] = []
